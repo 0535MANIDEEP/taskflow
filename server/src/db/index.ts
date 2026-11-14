@@ -30,7 +30,11 @@ if (useMemory) {
   const { newDb } = await import('pg-mem');
   const memory = newDb();
   const adapter = memory.adapters.createPg();
-  pool = new adapter.Pool() as unknown as pg.Pool;
+  // One connection only. The in-memory database lives inside the pool, and a
+  // second connection would see a second empty database. A request that
+  // arrives while another is in flight has to wait for this one rather than
+  // opening another and finding nothing there.
+  pool = new adapter.Pool({ max: 1 }) as unknown as pg.Pool;
 } else {
   if (!config.databaseUrl) {
     throw new Error(
