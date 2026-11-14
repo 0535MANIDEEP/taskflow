@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Environment. The .env file holds a database URL and a signing secret and
+# must never be committed. The example file is committed and holds no secrets.
+.env
+.env.local
+.env.*.local
+
+# Test and coverage output
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
