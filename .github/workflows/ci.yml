@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    name: Typecheck, test and build
+    runs-on: ubuntu-latest
+
+    # A hung job is worse than a failed one: it blocks the merge and nobody
+    # looks at it. Ten minutes is far more than this suite needs, so hitting
+    # it means something is stuck.
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      # The repository uses npm workspaces, so this one install covers the
+      # server and the front end together.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      # No database service is needed here. The suite sets DB_DRIVER=memory
+      # in the vitest config, which makes the database module load pg-mem
+      # instead of connecting to Postgres. Every query the tests run is the
+      # same SQL the app runs against a real database.
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
