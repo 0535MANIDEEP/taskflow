@@ -59,6 +59,16 @@ member. There is no way to ask for a different one.
 You need Node 20 or newer and a PostgreSQL database. The free one from
 [Neon](https://neon.tech) takes about two minutes and needs no card.
 
+> **Everything in this project runs on free tiers.** Nothing here requires a
+> paid service. The front end is a static build, the API is a Node function,
+> the database is a free-plan Postgres, and CI is GitHub Actions on a public
+> repository. If a provider ever asks for a card or puts a step behind a pay
+> wall, that step is the wrong one, and the deploy waits.
+
+Note that Neon's free plan asks for an email verification before it will link
+an account to Vercel. That is the one step a person has to do; nothing else
+about the deploy needs an account other than those two.
+
 ```bash
 git clone https://github.com/0535MANIDEEP/taskflow
 cd taskflow

@@ -5,6 +5,9 @@ node_modules/
 dist/
 *.tsbuildinfo
 
+# Vercel link directory. A link carries the project id and is local-only.
+.vercel
+
 # Environment. The .env file holds a database URL and a signing secret and
 # must never be committed. The example file is committed and holds no secrets.
 .env
