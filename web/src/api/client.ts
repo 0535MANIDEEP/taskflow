@@ -28,8 +28,12 @@ export const clearToken = (): void => localStorage.removeItem(TOKEN_KEY);
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const token = getToken();
+  // The API sits behind its own address in production. Left unset, the
+  // front end calls its own origin, which is what a single-process deploy
+  // needs and what the development proxy is for.
+  const base = import.meta.env.VITE_API_URL ?? '';
 
-  const response = await fetch(path, {
+  const response = await fetch(`${base}${path}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',

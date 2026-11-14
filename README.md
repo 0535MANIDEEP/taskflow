@@ -6,6 +6,19 @@ layer and applied on the server.
 
 **Stack:** React 19, TypeScript, Node.js, Express 5, PostgreSQL, JWT, Zod, Vitest, GitHub Actions
 
+**Live:** https://taskflow-web-rosy.vercel.app · API: https://taskflow-api-murex.vercel.app
+
+Sign up, and the account you make is the admin. Make a second one in another
+browser, and it is a member, sees none of the first account's projects, and has
+no delete button.
+
+> **What the free tier costs you, honestly.** The database scales to zero after
+> five minutes idle, so the first request after a quiet spell takes a few
+> seconds to wake it. Nothing is charged for that. The limits are 1 GB of
+> storage and 100 compute hours a month per project, and the front end is on
+> Vercel's Hobby plan, which is free for personal use. If either ever asks for
+> a card, the deploy has outgrown it and that is the point to stop.
+
 ## What it does
 
 - Register and sign in, with bcrypt hashed passwords and a seven day JWT
@@ -57,17 +70,11 @@ member. There is no way to ask for a different one.
 ## Running it
 
 You need Node 20 or newer and a PostgreSQL database. The free one from
-[Neon](https://neon.tech) takes about two minutes and needs no card.
-
-> **Everything in this project runs on free tiers.** Nothing here requires a
-> paid service. The front end is a static build, the API is a Node function,
-> the database is a free-plan Postgres, and CI is GitHub Actions on a public
-> repository. If a provider ever asks for a card or puts a step behind a pay
-> wall, that step is the wrong one, and the deploy waits.
-
-Note that Neon's free plan asks for an email verification before it will link
-an account to Vercel. That is the one step a person has to do; nothing else
-about the deploy needs an account other than those two.
+[Neon](https://neon.tech) takes about two minutes, needs no card, and has no
+time limit. The front end and the API are two separate Vercel projects, so
+there is one extra environment variable to set on the front end:
+`VITE_API_URL`, pointing at the API's address. The API takes `DATABASE_URL`
+and `JWT_SECRET`. Everything else is the same in development and production.
 
 ```bash
 git clone https://github.com/0535MANIDEEP/taskflow
