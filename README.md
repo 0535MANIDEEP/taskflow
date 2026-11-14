@@ -17,6 +17,15 @@ layer and applied on the server.
 - Role based route guards in the browser, and the same rules enforced by the API
 - 44 automated tests, and a CI run on every push
 
+![The project list, as the admin](docs/projects.png)
+
+![The task board](docs/board.png)
+
+The same list as a member: no delete button, and none of the admin's projects,
+because the API filtered them out rather than the interface hiding them.
+
+![The project list, as a member](docs/member.png)
+
 ## The roles
 
 The rule is decided in one place, the service layer, and nowhere else. The
