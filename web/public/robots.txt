@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://taskflow-web-rosy.vercel.app/sitemap.xml
